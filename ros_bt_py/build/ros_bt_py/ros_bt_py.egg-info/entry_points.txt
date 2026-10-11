@@ -1,0 +1,8 @@
+[console_scripts]
+assignment_manager_node = ros_bt_py.assignment_manager_node:main
+capability_repository_node = ros_bt_py.capability_repository_node:main
+find_best_executor_node = ros_bt_py.find_best_executor_node:main
+mission_control_node = ros_bt_py.mission_control_node:main
+remote_tree_slot_node = ros_bt_py.remote_tree_slot_node:main
+tree_node = ros_bt_py.tree_node:main
+

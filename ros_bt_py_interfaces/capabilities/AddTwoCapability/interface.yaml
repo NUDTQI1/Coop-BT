@@ -1,0 +1,14 @@
+name: AddTwoCapability
+description: Lol this is a test
+options: []
+inputs:
+  - key: operand1
+    serialized_value: '2'
+    serialized_type: '{"py/type": "builtins.int"}'
+  - key: operand2
+    serialized_value: '2'
+    serialized_type: '{"py/type": "builtins.int"}'
+outputs:
+  - key: result
+    serialized_value: '4'
+    serialized_type: '{"py/type": "builtins.int"}'

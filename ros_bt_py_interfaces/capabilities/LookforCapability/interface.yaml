@@ -1,0 +1,11 @@
+name: LookforCapability
+description: "Look for colored thing"
+options: []
+inputs:
+  - key: color
+    serialized_value: 'null'
+    serialized_type: '{"py/type": "builtins.str"}'
+outputs:
+  - key: result
+    serialized_value: 'false'
+    serialized_type: '{"py/type": "builtins.bool"}'

@@ -1,0 +1,14 @@
+name: ClearObjectCapability
+description: "clear finished task object"
+options: []
+inputs:
+  - key: manager
+    serialized_value: 'null'
+    serialized_type: '{"py/type": "builtins.str"}'
+  - key: start_symbol
+    serialized_value: 'null'
+    serialized_type: '{"py/type": "builtins.str"}'
+outputs:
+  - key: result
+    serialized_value: 'false'
+    serialized_type: '{"py/type": "builtins.bool"}'

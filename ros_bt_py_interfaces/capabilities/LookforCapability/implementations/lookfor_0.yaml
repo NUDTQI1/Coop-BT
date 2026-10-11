@@ -1,0 +1,206 @@
+name: "lookfor0"
+version: "1.0.1"
+preconditions: []
+tags_dict: '{}'
+tree:
+  name: 'test.yaml'
+  path: ''
+  root_name: ''
+  nodes:
+    - module: ros_bt_py.nodes.sequence
+      node_class: Sequence
+      version: 0.1.0
+      max_children: -1
+      name: Sequence_root
+      child_names:
+        - LookforCapability_InputDataBridge
+        - SetLocationList
+        - RepeatIfFail
+      options: []
+      inputs: []
+      outputs: []
+      state: SHUTDOWN
+    - module: ros_bt_py.capability.bridge
+      node_class: LookforCapability_InputDataBridge
+      version: ''
+      max_children: 0
+      name: LookforCapability_InputDataBridge
+      child_names: []
+      options: []
+      inputs: []
+      outputs:
+        - key: color
+          serialized_value: 'null'
+          serialized_type: '{"py/type": "builtins.str"}'
+      state: SHUTDOWN
+    - module: ros_bt_py.nodes.navigation
+      node_class: SetLocationList
+      version: ''
+      max_children: 0
+      name: SetLocationList
+      child_names: []
+      options:
+        - key: file_path
+          serialized_value: >-
+            "/home/sherry/ros2_ros_bt_py_ws/src/turtlebot3_behavior_demos/tb3_worlds/maps/sim_house_locations.yaml"
+          serialized_type: '{"py/type": "builtins.str"}'
+        - key: list_type
+          serialized_value: '{"py/type": "builtins.list"}'
+          serialized_type: '{"py/type": "builtins.type"}'
+        - key: Location_type
+          serialized_value: '{"py/type": "builtins.dict"}'
+          serialized_type: '{"py/type": "builtins.type"}'
+      inputs: []
+      outputs:
+        - key: loc_list
+          serialized_value: 'null'
+          serialized_type: '{"py/type": "builtins.list"}'
+        - key: Locations
+          serialized_value: 'null'
+          serialized_type: '{"py/type": "builtins.dict"}'
+      state: SHUTDOWN
+    - module: ros_bt_py.nodes.decorators
+      node_class: RepeatIfFail
+      version: 0.1.0
+      max_children: 1
+      name: RepeatIfFail
+      child_names:
+        - Sequence
+      options: []
+      inputs: []
+      outputs: []
+      state: SHUTDOWN
+    - module: ros_bt_py.nodes.sequence
+      node_class: Sequence
+      version: 0.1.0
+      max_children: -1
+      name: Sequence
+      child_names:
+        - GetLocationFromQueue
+        - move
+        - LookForObject
+        - LookforCapability_OutputDataBridge
+      options: []
+      inputs: []
+      outputs: []
+      state: SHUTDOWN
+    - module: ros_bt_py.nodes.navigation
+      node_class: GetLocationFromQueue
+      version: ''
+      max_children: 0
+      name: GetLocationFromQueue
+      child_names: []
+      options:
+        - key: list_msgs
+          serialized_value: '{"py/type": "builtins.list"}'
+          serialized_type: '{"py/type": "builtins.type"}'
+        - key: location_msgs
+          serialized_value: '{"py/type": "builtins.dict"}'
+          serialized_type: '{"py/type": "builtins.type"}'
+      inputs:
+        - key: get_list
+          serialized_value: 'null'
+          serialized_type: '{"py/type": "builtins.list"}'
+        - key: get_locations
+          serialized_value: 'null'
+          serialized_type: '{"py/type": "builtins.dict"}'
+      outputs:
+        - key: target_pose
+          serialized_value: 'null'
+          serialized_type: '{"py/type": "builtins.list"}'
+      state: SHUTDOWN
+    - module: ros_bt_py.nodes.navigation
+      node_class: move
+      version: ''
+      max_children: 0
+      name: move
+      child_names: []
+      options:
+        - key: pose_type
+          serialized_value: '{"py/type": "builtins.list"}'
+          serialized_type: '{"py/type": "builtins.type"}'
+        - key: namespace
+          serialized_value: '"turtle1"'
+          serialized_type: '{"py/type": "builtins.str"}'
+      inputs:
+        - key: get_pose
+          serialized_value: 'null'
+          serialized_type: '{"py/type": "builtins.list"}'
+      outputs: []
+      state: SHUTDOWN
+    - module: ros_bt_py.nodes.vision
+      node_class: LookForObject
+      version: ''
+      max_children: 0
+      name: LookForObject
+      child_names: []
+      options:
+        - key: color_type
+          serialized_value: '{"py/type": "builtins.str"}'
+          serialized_type: '{"py/type": "builtins.type"}'
+        - key: namespace
+          serialized_value: '"turtle1"'
+          serialized_type: '{"py/type": "builtins.str"}'
+      inputs:
+        - key: get_color
+          serialized_value: 'null'
+          serialized_type: '{"py/type": "builtins.str"}'
+      outputs: []
+      state: SHUTDOWN
+    - module: ros_bt_py.capability.bridge
+      node_class: LookforCapability_OutputDataBridge
+      version: ''
+      max_children: 0
+      name: LookforCapability_OutputDataBridge
+      child_names: []
+      options: []
+      inputs:
+        - key: result
+          serialized_value: 'null'
+          serialized_type: '{"py/type": "builtins.bool"}'
+      outputs: []
+      state: SHUTDOWN
+  data_wirings:
+    - source:
+        node_name: SetLocationList
+        data_kind: outputs
+        data_key: loc_list
+      target:
+        node_name: GetLocationFromQueue
+        data_kind: inputs
+        data_key: get_list
+    - source:
+        node_name: SetLocationList
+        data_kind: outputs
+        data_key: Locations
+      target:
+        node_name: GetLocationFromQueue
+        data_kind: inputs
+        data_key: get_locations
+    - source:
+        node_name: GetLocationFromQueue
+        data_kind: outputs
+        data_key: target_pose
+      target:
+        node_name: move
+        data_kind: inputs
+        data_key: get_pose
+    - source:
+        node_name: LookforCapability_InputDataBridge
+        data_kind: outputs
+        data_key: color
+      target:
+        node_name: LookForObject
+        data_kind: inputs
+        data_key: get_color
+    - source:
+        node_name: LookForObject
+        data_kind: outputs
+        data_key: result
+      target:
+        node_name: LookforCapability_OutputDataBridge
+        data_kind: inputs
+        data_key: result
+  tick_frequency_hz: 10
+  state: EDITABLE
+  public_node_data: []

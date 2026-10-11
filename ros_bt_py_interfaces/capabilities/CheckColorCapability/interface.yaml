@@ -1,0 +1,11 @@
+name: CheckColorCapability
+description: Lol this is a test
+options: []
+inputs:
+  - key: target_position
+    serialized_value: 'null'
+    serialized_type: '{"py/type": "builtins.list"}'
+outputs:
+  - key: color_result
+    serialized_value: 'null'
+    serialized_type: '{"py/type": "builtins.str"}'

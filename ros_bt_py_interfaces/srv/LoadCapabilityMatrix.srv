@@ -1,0 +1,5 @@
+# Returns the loaded capability list
+int64[] cap_list
+---
+bool success
+int64[] cap_list
